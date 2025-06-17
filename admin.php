@@ -88,7 +88,8 @@ $section = isset($_GET['section']) ? $_GET['section'] : 'products';
     <?php
     $res = $mysqli->query("SELECT * FROM products ORDER BY id DESC");
     ?>
-    <table class="table table-bordered">
+    <div class="table-responsive">
+        <table class="table table-bordered align-middle text-center">
        <thead>
          <tr>
            <th>ID</th>
@@ -121,8 +122,9 @@ $section = isset($_GET['section']) ? $_GET['section'] : 'products';
     <?php
     $res = $mysqli->query("SELECT * FROM orders ORDER BY order_date DESC");
     ?>
-    <table class="table table-bordered">
-       <thead class="table-light">
+    <div class="table-responsive">
+        <table class="table table-bordered align-middle text-center">
+            <thead class="table-light">
          <tr>
            <th>ID</th>
            <th>Пользователь</th>
@@ -184,41 +186,42 @@ $section = isset($_GET['section']) ? $_GET['section'] : 'products';
        </tbody>
     </table>
 
-<?php elseif($section=='users'): ?>
+    <?php elseif($section=='users'): ?>
     <h3>Управление аккаунтами пользователей</h3>
     <?php
     $res = $mysqli->query("SELECT * FROM users ORDER BY id DESC");
     ?>
-    <table class="table table-bordered">
-       <thead>
-         <tr>
-           <th>ID</th>
-           <th>Имя</th>
-           <th>Email</th>
-           <th>Дата регистрации</th>
-           <th>Роль</th>
-           <th>Статус</th>
-           <th>Действия</th>
-         </tr>
-       </thead>
-       <tbody>
-         <?php while($user = $res->fetch_assoc()): ?>
-         <tr>
-           <td><?= $user['id'] ?></td>
-           <td><?= htmlspecialchars($user['name']) ?></td>
-           <td><?= htmlspecialchars($user['email']) ?></td>
-           <td><?= $user['registration_date'] ?></td>
-           <td><?= $user['role'] ?></td>
-           <td><?= $user['status'] ?></td>
-           <td>
-             <a href="edit_user.php?id=<?= $user['id'] ?>" class="btn btn-sm btn-warning">Изменить</a>
-             <a href="delete_user.php?id=<?= $user['id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Удалить аккаунт?');">Удалить</a>
-           </td>
-         </tr>
-         <?php endwhile; ?>
-       </tbody>
-    </table>
-
+    <div class="table-responsive">
+        <table class="table table-bordered align-middle text-center">
+            <thead class="table-light">
+                <tr>
+                    <th>ID</th>
+                    <th>Имя</th>
+                    <th>Email</th>
+                    <th>Дата регистрации</th>
+                    <th>Роль</th>
+                    <th>Статус</th>
+                    <th>Действия</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php while($user = $res->fetch_assoc()): ?>
+                    <tr>
+                        <td><?= $user['id'] ?></td>
+                        <td><?= htmlspecialchars($user['name']) ?></td>
+                        <td><?= htmlspecialchars($user['email']) ?></td>
+                        <td><?= $user['registration_date'] ?></td>
+                        <td><?= $user['role'] ?></td>
+                        <td><?= $user['status'] ?></td>
+                        <td>
+                            <a href="edit_user.php?id=<?= $user['id'] ?>" class="btn btn-sm btn-warning">Изменить</a>
+                            <a href="delete_user.php?id=<?= $user['id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Удалить аккаунт?');">Удалить</a>
+                        </td>
+                    </tr>
+                <?php endwhile; ?>
+            </tbody>
+        </table>
+    </div>
 <?php endif; ?>
 </div>
 
