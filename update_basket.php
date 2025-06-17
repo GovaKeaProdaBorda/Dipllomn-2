@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['basket_ids'], $_POST[
 
     for ($i = 0; $i < count($basket_ids); $i++) {
         $basket_id = intval($basket_ids[$i]);
-        $quantity = max(1, intval($quantities[$i])); // Минимум 1
+        $quantity = max(1, intval($quantities[$i])); 
 
         $stmt = $mysqli->prepare("UPDATE basket SET quantity = ? WHERE id = ? AND user_id = ?");
         $stmt->bind_param("iii", $quantity, $basket_id, $user_id);
