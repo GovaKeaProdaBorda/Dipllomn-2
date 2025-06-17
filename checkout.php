@@ -93,47 +93,47 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <p class="text-center">Ваша корзина пуста.</p>
         <?php else: ?>
         <form method="POST" action="checkout.php" id="checkout-form">
-            <div class="table-responsive">
-                <table class="table table-bordered">
-                    <thead class="table-light">
+        <div class="table-responsive">
+            <table class="table table-bordered align-middle text-center">
+                <thead class="table-light">
+                    <tr>
+                        <th>Товар</th>
+                        <th>Описание</th>
+                        <th>Цена</th>
+                        <th>Количество</th>
+                        <th>Итого</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($basket_items as $item): ?>
+                        <?php $subtotal = $item['price'] * $item['quantity']; ?>
                         <tr>
-                            <th>Товар</th>
-                            <th>Описание</th>
-                            <th>Цена</th>
-                            <th>Количество</th>
-                            <th>Итого</th>
+                            <td>
+                                <img src="<?= htmlspecialchars($item['image']) ?>" alt="<?= htmlspecialchars($item['name']) ?>" class="img-fluid" style="max-width: 80px;">
+                            </td>
+                            <td class="text-wrap"><?= htmlspecialchars($item['name']) ?></td>
+                            <td><?= number_format($item['price'], 2) ?> руб.</td>
+                            <td><?= $item['quantity'] ?></td>
+                            <td><?= number_format($subtotal, 2) ?> руб.</td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($basket_items as $item): ?>
-                            <?php $subtotal = $item['price'] * $item['quantity']; ?>
-                            <tr>
-                                <td>
-                                    <img src="<?= htmlspecialchars($item['image']) ?>" alt="<?= htmlspecialchars($item['name']) ?>" class="img-fluid" style="max-width: 100px;">
-                                </td>
-                                <td><?= htmlspecialchars($item['name']) ?></td>
-                                <td><?= number_format($item['price'], 2) ?> руб.</td>
-                                <td><?= $item['quantity'] ?></td>
-                                <td><?= number_format($subtotal, 2) ?> руб.</td>
-                            </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <td colspan="4" class="text-end">Итого по товарам:</td>
-                            <td class="text-start" id="items-total"><?= number_format($items_total, 2) ?> руб.</td>
-                        </tr>
-                        <tr id="delivery-row" style="display: none;">
-                            <td colspan="4" class="text-end">Стоимость доставки:</td>
-                            <td class="text-start" id="delivery-fee">500.00 руб.</td>
-                        </tr>
-                        <tr>
-                            <td colspan="4" class="text-end">Общая сумма:</td>
-                            <td class="text-start" id="order-total"><?= number_format($items_total, 2) ?> руб.</td>
-                        </tr>
-                    </tfoot>
-                </table>
-            </div>
+                    <?php endforeach; ?>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="4" class="text-end">Итого по товарам:</td>
+                        <td class="text-start" id="items-total"><?= number_format($items_total, 2) ?> руб.</td>
+                    </tr>
+                    <tr id="delivery-row" style="display: none;">
+                        <td colspan="4" class="text-end">Стоимость доставки:</td>
+                        <td class="text-start" id="delivery-fee">500.00 руб.</td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" class="text-end">Общая сумма:</td>
+                        <td class="text-start" id="order-total"><?= number_format($items_total, 2) ?> руб.</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
 
             <div class="mb-4">
                 <h4>Способ получения заказа</h4>
