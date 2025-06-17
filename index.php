@@ -31,7 +31,7 @@ while ($row = $result->fetch_assoc()){
             <div class="card-body text-center">
               <h5 class="card-title"><?= htmlspecialchars($product['name']) ?></h5>
               <p class="card-text text-muted"><?= number_format($product['price'], 2) ?> руб.</p>
-              <button class="btn btn-outline-primary btn-sm add-to-basket" data-product-id="<?= $product['id'] ?>">Добавить в корзину</button>
+              <a href="product.php?id=<?= $product['id'] ?>" class="btn btn-outline-primary btn-sm">Перейти к товару</a>
             </div>
           </div>
         </div>
@@ -47,7 +47,6 @@ while ($row = $result->fetch_assoc()){
       transform: scale(1.05);
     }
   </style>
-  
   <script>
     function attachAddToBasketHandlers() {
       document.querySelectorAll(".add-to-basket").forEach(button => {
